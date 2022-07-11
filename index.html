@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+        integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer">
+    </script>
+    <script>
+        $(function () {
+            let $winWidth 
+            $(window).resize(function(){
+                $winWidth = $(window).width()
+                console.log($winWidth)
+            })
+
+
+            // 모바일 버전의 사이트 맵 열기 및 닫기
+            $('.open').click(function () {
+                $(this).hide()
+                $('.close').show()
+                $('header ._inner').prepend('<div class="nav_bg"></div>')
+                $('.nav_bg').fadeIn(1000, function () {
+                    $('nav').animate({
+                        left: 0
+                    }, 500)
+                })
+            })
+            $('.close').click(function () {
+                $(this).hide()
+                $('.open').show()
+                $('nav').animate({
+                    left: 100 + '%'
+                }, 500, function () {
+                    $('.nav_bg').fadeOut(1000, function () {
+                        $(this).remove()
+                    })
+                })
+                $('.sub').slideUp()
+
+            })
+
+            // 모바일 버전의 서브메뉴 열기 및 닫기
+            $('.gnb>li>a').click(function (e) {
+                e.preventDefault() 
+            })
+
+            $('.gnb>li').click(function () {
+                if ($(this).attr('class') != 'on') {
+                    $('.gnb>li').removeClass('on')
+                    $(this).addClass('on')
+                    $('.sub').slideUp()
+                    $(this).find('.sub').slideToggle()
+
+                } else {
+                    $(this).find('.sub').slideToggle()
+                    $('.gnb>li').removeClass('on')
+                }
+            })
+
+
+
+            // PC 버전의 .sub 배경 컬러
+
+            $('.gnb>li').mouseover(function () {
+                $('header ._inner').append('<div class="sub_bg"></div>')
+                // $(this).find('.sub').css('display', 'flex')
+            })
+
+            $('.gnb>li').mouseout(function () {
+                $('.sub_bg').remove()
+                // $(this).find('.sub').css('display', 'none')
+            })
+  
+
+        })
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="_inner">
+            <h1>로고</h1>
+            <nav>
+                <ul class="gnb">
+                    <li>
+                        <a href="">문화체험</a>
+                        <ul class="sub">
+                            <li><a href="">집콕문화생활</a></li>
+                            <li><a href="">한눈에 보는 문화정보</a></li>
+                            <li><a href="">문화릴레이티켓</a></li>
+                            <li><a href="">문화공간,단체</a></li>
+                            <li><a href="">문화SNS 지도</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">문화공감</a>
+                        <ul class="sub">
+                            <li><a href="">문화TV</a></li>
+                            <li><a href="">공감리포트</a></li>
+                            <li><a href="">카드뉴스</a></li>
+                            <li><a href="">웹진</a></li>
+                            <li><a href="">문화캘린더</a></li>
+                            <li><a href="">문화마루</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">문화지식</a>
+                        <ul class="sub">
+                            <li><a href="">전통문양</a></li>
+                            <li><a href="">정책뉴스</a></li>
+                            <li><a href="">연구교육자료</a></li>
+                            <li><a href="">예술지식백과</a></li>
+                            <li><a href="">실감형 콘텐츠</a></li>
+                            <li><a href="">문화유물</a></li>
+                            <li><a href="">도서</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">문화알리미</a>
+                        <ul class="sub">
+                            <li><a href="">문화정보분석</a></li>
+                            <li><a href="">채용·자원봉사 모집</a></li>
+                            <li><a href="">문화이벤트</a></li>
+                            <li><a href="">문화지원사업</a></li>
+                            <li><a href="">문화포털API</a></li>
+                            <li><a href="">공지사항</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <button class="open" title="사이트맵열기">열기</button>
+            <button class="close" title="사이트맵닫기">닫기</button>
+        </div>
+
+    </header>
+</body>
+
+</html>
